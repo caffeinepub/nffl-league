@@ -1,15 +1,14 @@
 import {
-  Link,
   Outlet,
   RouterProvider,
   createHashHistory,
   createRootRoute,
   createRoute,
   createRouter,
-  useLocation,
 } from "@tanstack/react-router";
 import { Footer } from "./components/Footer";
 import { Navbar } from "./components/Navbar";
+import { useTeamInit } from "./hooks/useTeamInit";
 import { HomePage } from "./pages/HomePage";
 import { NewsDetailPage } from "./pages/NewsDetailPage";
 import { NewsPage } from "./pages/NewsPage";
@@ -17,9 +16,9 @@ import { SchedulePage } from "./pages/SchedulePage";
 import { StandingsPage } from "./pages/StandingsPage";
 import { TeamsPage } from "./pages/TeamsPage";
 
-// Root layout
-const rootRoute = createRootRoute({
-  component: () => (
+function RootLayout() {
+  useTeamInit();
+  return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       <main className="flex-1">
@@ -27,7 +26,12 @@ const rootRoute = createRootRoute({
       </main>
       <Footer />
     </div>
-  ),
+  );
+}
+
+// Root layout
+const rootRoute = createRootRoute({
+  component: RootLayout,
 });
 
 const homeRoute = createRoute({

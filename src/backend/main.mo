@@ -7,6 +7,8 @@ import Runtime "mo:core/Runtime";
 import Time "mo:core/Time";
 import Int "mo:core/Int";
 
+
+
 actor {
   type TeamId = Nat;
   type GameId = Nat;
@@ -105,64 +107,6 @@ actor {
   let newsStore = Map.empty<NewsPostId, NewsPost>();
   let standingStore = Map.empty<TeamId, Standing>();
 
-  func initializeSampleData() {
-    // Sample Teams
-    let teams : [Team] = [
-      // Division 1
-      { id = 1; name = "Red Rockets"; city = "New York"; colors = { primary = "Red"; secondary = "White" }; division = "East"; wins = 5; losses = 2; ties = 1 },
-      { id = 2; name = "Blue Bulls"; city = "Chicago"; colors = { primary = "Blue"; secondary = "Silver" }; division = "East"; wins = 4; losses = 3; ties = 1 },
-      { id = 3; name = "Green Gators"; city = "Miami"; colors = { primary = "Green"; secondary = "Orange" }; division = "East"; wins = 6; losses = 1; ties = 1 },
-      { id = 4; name = "Yellow Jackets"; city = "Boston"; colors = { primary = "Yellow"; secondary = "Black" }; division = "East"; wins = 3; losses = 5; ties = 0 },
-      // Division 2
-      { id = 5; name = "Purple Panthers"; city = "Los Angeles"; colors = { primary = "Purple"; secondary = "White" }; division = "West"; wins = 5; losses = 3; ties = 0 },
-      { id = 6; name = "Orange Outlaws"; city = "Houston"; colors = { primary = "Orange"; secondary = "Black" }; division = "West"; wins = 4; losses = 4; ties = 0 },
-      { id = 7; name = "Silver Sharks"; city = "San Francisco"; colors = { primary = "Silver"; secondary = "Blue" }; division = "West"; wins = 6; losses = 2; ties = 0 },
-      { id = 8; name = "Black Bears"; city = "Seattle"; colors = { primary = "Black"; secondary = "Green" }; division = "West"; wins = 3; losses = 4; ties = 1 },
-    ];
-
-    for (team in teams.values()) {
-      teamStore.add(team.id, team);
-    };
-
-    // Sample Games
-    let games : [Game] = [
-      { id = 1; homeTeamId = 1; awayTeamId = 2; date = "2023-10-01"; time = "15:00"; location = "New York"; homeScore = ?21; awayScore = ?14; status = #completed; week = 1; season = 2023 },
-      { id = 2; homeTeamId = 3; awayTeamId = 4; date = "2023-10-01"; time = "17:00"; location = "Miami"; homeScore = ?17; awayScore = ?24; status = #completed; week = 1; season = 2023 },
-      // ... more games
-    ];
-
-    for (game in games.values()) {
-      gameStore.add(game.id, game);
-    };
-
-    // Sample Standings
-    let standings : [Standing] = [
-      { teamId = 1; wins = 5; losses = 2; ties = 1; pointsFor = 200; pointsAgainst = 150; division = "East"; conferenceRank = 1 },
-      // ... more standings
-    ];
-
-    for (standing in standings.values()) {
-      standingStore.add(standing.teamId, standing);
-    };
-
-    // Sample News Posts
-    let newsPosts : [NewsPost] = [
-      {
-        id = 1;
-        title = "Season Kickoff";
-        content = "The 2023 NFFL season has officially started!";
-        author = "Admin";
-        publishedDate = Time.now();
-        category = #announcement;
-      },
-      // ... more news posts
-    ];
-
-    for (news in newsPosts.values()) {
-      newsStore.add(news.id, news);
-    };
-  };
-
   // Query Functions
   public query func getTeams() : async [Team] {
     teamStore.toArray().map(func((_, t)) { t });
@@ -217,9 +161,5 @@ actor {
 
   public shared ({ caller }) func addNewsPost(news : NewsPost) : async () {
     newsStore.add(news.id, news);
-  };
-
-  public shared ({ caller }) func initialize() : async () {
-    initializeSampleData();
   };
 };

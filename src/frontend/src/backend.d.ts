@@ -79,5 +79,4 @@ export interface backendInterface {
     getTeamGames(teamId: TeamId): Promise<Array<Game>>;
     getTeams(): Promise<Array<Team>>;
     getUpcomingGames(): Promise<Array<Game>>;
-    initialize(): Promise<void>;
 }

@@ -134,7 +134,7 @@ export function HomePage() {
               {
                 icon: Users,
                 label: "Active Teams",
-                value: totalTeams || "16",
+                value: totalTeams || "2",
                 color: "text-orange-DEFAULT",
               },
               {

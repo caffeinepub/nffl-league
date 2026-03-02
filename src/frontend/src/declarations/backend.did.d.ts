@@ -75,7 +75,6 @@ export interface _SERVICE {
   'getTeamGames' : ActorMethod<[TeamId], Array<Game>>,
   'getTeams' : ActorMethod<[], Array<Team>>,
   'getUpcomingGames' : ActorMethod<[], Array<Game>>,
-  'initialize' : ActorMethod<[], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

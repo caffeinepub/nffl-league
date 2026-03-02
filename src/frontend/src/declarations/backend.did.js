@@ -78,7 +78,6 @@ export const idlService = IDL.Service({
   'getTeamGames' : IDL.Func([TeamId], [IDL.Vec(Game)], ['query']),
   'getTeams' : IDL.Func([], [IDL.Vec(Team)], ['query']),
   'getUpcomingGames' : IDL.Func([], [IDL.Vec(Game)], ['query']),
-  'initialize' : IDL.Func([], [], []),
 });
 
 export const idlInitArgs = [];
@@ -154,7 +153,6 @@ export const idlFactory = ({ IDL }) => {
     'getTeamGames' : IDL.Func([TeamId], [IDL.Vec(Game)], ['query']),
     'getTeams' : IDL.Func([], [IDL.Vec(Team)], ['query']),
     'getUpcomingGames' : IDL.Func([], [IDL.Vec(Game)], ['query']),
-    'initialize' : IDL.Func([], [], []),
   });
 };
 

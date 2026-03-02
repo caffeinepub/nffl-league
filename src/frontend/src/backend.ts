@@ -161,7 +161,6 @@ export interface backendInterface {
     getTeamGames(teamId: TeamId): Promise<Array<Game>>;
     getTeams(): Promise<Array<Team>>;
     getUpcomingGames(): Promise<Array<Game>>;
-    initialize(): Promise<void>;
 }
 import type { Game as _Game, GameId as _GameId, GameStatus as _GameStatus, NewsCategory as _NewsCategory, NewsPost as _NewsPost, NewsPostId as _NewsPostId, TeamId as _TeamId, Time as _Time } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
@@ -332,20 +331,6 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getUpcomingGames();
             return from_candid_vec_n9(this._uploadFile, this._downloadFile, result);
-        }
-    }
-    async initialize(): Promise<void> {
-        if (this.processError) {
-            try {
-                const result = await this.actor.initialize();
-                return result;
-            } catch (e) {
-                this.processError(e);
-                throw new Error("unreachable");
-            }
-        } else {
-            const result = await this.actor.initialize();
-            return result;
         }
     }
 }
